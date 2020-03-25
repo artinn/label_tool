@@ -18,16 +18,16 @@ class MainWindow(QMainWindow):
         open_action = QAction(QIcon('images/open.png'), '  &Open', self)
         open_action.setStatusTip('Open file')
         self.toolbar.addAction(open_action)
-        #open_action.trigerred.connect()
-        self.openFileNamesDialog()
+        open_action.triggered.connect(self.openFileNamesDialog)
+
 
     def openFileNamesDialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.Directory
+        options |= QFileDialog.ShowDirsOnly
+        dir = QFileDialog.getExistingDirectory(self, options=options)
+        print(dir)
 
-        #files, _ = QFileDialog.getOpenFileNames(self, "QFileDialog.getOpenFileNames()", "",
-                                                #"All Files (*);;Python Files (*.py)", options=options)
-        QFileDialog.exec()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
