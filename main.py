@@ -6,32 +6,32 @@
 
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QAction, qApp, QMainWindow, QFileDialog
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPixmap
 
-class TutorialWinow(QMainWindow):
+
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('LABEL TOOL')
         self.statusBar().showMessage('This is a status bar')
-
         self.toolbar = self.addToolBar('Open')
-
         open_action = QAction(QIcon('images/open.png'), '  &Open', self)
-        #open_action.setShortcut('Win+E')
         open_action.setStatusTip('Open file')
-        #open_action.triggered.connect(qApp.quit)
-
         self.toolbar.addAction(open_action)
-        self.setGeometry(300, 300, 400, 200)
+        #open_action.trigerred.connect()
+        self.openFileNamesDialog()
 
-        fname = QFileDialog.getOpenFileName(self, 'Open file',
-                                            'c:\\', "Image files (*.jpg *.gif)")
+    def openFileNamesDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.Directory
 
+        #files, _ = QFileDialog.getOpenFileNames(self, "QFileDialog.getOpenFileNames()", "",
+                                                #"All Files (*);;Python Files (*.py)", options=options)
+        QFileDialog.exec()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    tutorial_window = TutorialWinow()
-    tutorial_window.showMaximized()
-
-    tutorial_window.setWindowIcon(QIcon('images/icon.png'))
+    main_window = MainWindow()
+    main_window.showMaximized()
+    main_window.setWindowIcon(QIcon('images/icon.png'))
     sys.exit(app.exec_())
