@@ -5,21 +5,26 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QAction, qApp, QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QAction, qApp, QMainWindow, QFileDialog, QLabel, QVBoxLayout
 from PyQt5.QtGui import QIcon, QPixmap
+from qtpy import QtGui, QtWidgets
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('LABEL TOOL')
-        self.statusBar().showMessage('This is a status bar')
         self.toolbar = self.addToolBar('Open')
         open_action = QAction(QIcon('images/open.png'), '  &Open', self)
         open_action.setStatusTip('Open file')
         self.toolbar.addAction(open_action)
         open_action.triggered.connect(self.openFileNamesDialog)
 
+        label = QLabel(self)
+        pixmap = QPixmap('images/image_jeans.jpg')
+        label.setPixmap(pixmap)
+        self.setCentralWidget(label)
+        self.resize(pixmap.width()+pixmap.width(), pixmap.height()+pixmap.height())
 
     def openFileNamesDialog(self):
         options = QFileDialog.Options()
