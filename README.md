@@ -1,1 +1,1 @@
-# label_tool
+# Label tool for multioutput image labaling
